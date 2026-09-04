@@ -3,14 +3,13 @@ pipeline {
 
     tools {
         maven 'Maven 3.x'
-        jdk 'Java 17'
+        jdk 'Java 21' 
     }
 
     environment {
         IMAGE_NAME = "my-spring-boot-app"
         CONTAINER_NAME = "spring-boot-container"
-        HOST_PORT = "8081"
-        CONTAINER_PORT = "8080"
+        APP_PORT = "8081"
     }
 
     stages {
@@ -43,8 +42,8 @@ pipeline {
 
         stage('Docker Deploy / Run') {
             steps {
-                sh "docker run -d --name ${CONTAINER_NAME} -p ${HOST_PORT}:${CONTAINER_PORT} ${IMAGE_NAME}:latest"
-                echo "Application deployed successfully on port ${HOST_PORT}!"
+                sh "docker run -d --name ${CONTAINER_NAME} -p ${APP_PORT}:${APP_PORT} ${IMAGE_NAME}:latest"
+                echo "Java 21 Application deployed completely on port ${APP_PORT}!"
             }
         }
     }
@@ -55,4 +54,3 @@ pipeline {
         }
     }
 }
-
